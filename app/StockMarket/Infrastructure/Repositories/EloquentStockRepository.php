@@ -6,6 +6,7 @@ namespace App\StockMarket\Infrastructure\Repositories;
 
 use App\StockMarket\Domain\Models\Stock;
 use App\StockMarket\Domain\Repositories\StockRepository;
+use App\StockMarket\Domain\ValueObject\StockWithAllPricesAndAllPercentageChanges;
 use App\StockMarket\Domain\ValueObject\StockWithCurrentPriceAndPercentageChange;
 use Illuminate\Support\Collection;
 
@@ -28,6 +29,15 @@ final class EloquentStockRepository implements StockRepository
             $stock,
             $currentStockPrice,
             $this->findPercentageChangeForStock($prices[0], $prices[1]),
+        );
+    }
+
+    public function findAllPricesAndPercentageChangesForStock(Stock $stock): StockWithAllPricesAndAllPercentageChanges
+    {
+        return  new StockWithAllPricesAndAllPercentageChanges(
+            $stock,
+            $this->findAllPricesForStock($stock),
+            $this->findAllPercentageChangesForStock($stock),
         );
     }
 
