@@ -13,6 +13,32 @@ final class EloquentStockRepository implements StockRepository
         return $stock->prices()->latest('date_and_time_of_price')->get();
     }
 
+    private function findAllPercentageChangesForStock(Stock $stock): Collection
+    {
+        $prices = $stock->prices()->latest('date_and_time_of_price')->get();
+
+        if ($prices->count() < 2) {
+            return collect();
+        }
+
+        $percentageChanges = collect();
+        $previousPrice = null;
+
+        foreach($prices as $price) {
+            if ($previousPrice === null) {
+                $previousPrice = (string) $price->price;
+                continue;
+            }
+            $currentPrice = (string) $price->price;
+
+            $percentageChanges->put($price->date_and_time_of_price, $this->findPercentageChangeForStock($currentPrice, $previousPrice));
+
+            $previousPrice = $currentPrice;
+        }
+
+        return $percentageChanges;
+    }
+
     private function findPercentageChangeForStock(string $currentPrice, string $previousPrice): ?string
     {
         if(bccomp($previousPrice, '0', 4) === 0) {
