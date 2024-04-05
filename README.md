@@ -6,7 +6,7 @@ It utilizes domain-driven design principles to manage business logic effectively
 Laravel Sanctum is employed for token management, allowing API users to authenticate securely. 
 Redis is used for caching and storing real-time data.
 Laravel Sail streamlines Docker-based development, enabling easy deployment and testing.
-Laravel Pint ensures type safety in models, enhancing code reliability.
+Laravel Pint is used to ensure coding standards are met, automatically formatting the code to maintain consistency and readability.
 Additionally, Larastan is used with level 5 for static analysis, ensuring code quality and correctness.
 
 ## Getting started
