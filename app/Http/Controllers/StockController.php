@@ -24,10 +24,10 @@ class StockController extends Controller
 
     public function current(Request $request): StockWithCurrentPriceAndPercentageChangeResource
     {
-        $validatdData = $request->validate([
+        $validatedData = $request->validate([
             'symbol' => ['required', 'string', 'max:255', Rule::in(Stock::pluck('symbol'))],
         ]);
-        $stock = Stock::where('symbol', $validatdData['symbol'])->first();
+        $stock = Stock::where('symbol', $validatedData['symbol'])->first();
 
         return StockWithCurrentPriceAndPercentageChangeResource::make($this->stockRepository->findCurrentPriceAndPercentageChangeForStock($stock));
     }
