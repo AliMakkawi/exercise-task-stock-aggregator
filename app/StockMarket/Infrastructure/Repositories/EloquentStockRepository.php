@@ -48,7 +48,7 @@ final class EloquentStockRepository implements StockRepository
 
     private function findAllPercentageChangesForStock(Stock $stock): Collection
     {
-        $prices = $stock->prices()->latest('date_and_time_of_price')->get();
+        $prices = $stock->prices()->oldest('date_and_time_of_price')->get();
 
         if ($prices->count() < 2) {
             return collect();
