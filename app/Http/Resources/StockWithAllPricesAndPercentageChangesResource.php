@@ -21,8 +21,8 @@ class StockWithAllPricesAndPercentageChangesResource extends JsonResource
         $pricesAndPercentageChanges = $prices->map(function ($price, $date) use ($changes) {
             $change = $changes[$date] ?? null;
             return [
-                'price' => '$' . $price,
-                'percentage_change' =>  isset($change) ? $change . '%' : 'None',
+                'price' => '$ ' . $price,
+                'percentage_change' =>  isset($change) ? $change . ' %' : 'None',
             ];
         });
 

@@ -19,8 +19,8 @@ class StockWithCurrentPriceAndPercentageChangeResource extends JsonResource
         return [
             'name' => $this->resource->stock->name,
             'symbol' => $this->resource->stock->symbol,
-            'price' => '$'. $this->resource->stockPrice->price,
-            'percentage_change' => isset($percentageChange) ? $percentageChange . '%' : 'None',
+            'price' => '$ '. $this->resource->stockPrice->price,
+            'percentage_change' => isset($percentageChange) ? $percentageChange . ' %' : 'None',
         ];
     }
 }
